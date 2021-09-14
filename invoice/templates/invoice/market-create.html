@@ -8,12 +8,7 @@
                 <form class="" method="POST" action="">
                     {% csrf_token %}
                     <div class="columns is-centered">
-                        <div class="column is-one-third">
-                            {{form.name|bulma}}
-                        </div>
-                        <div class="column is-one-third">
-                            {{form.location|bulma}}
-                        </div>
+                        {{form.as_p}}
                 </form>
                 <div class="row spacer">
                     <div class="col-4 offset-2">
