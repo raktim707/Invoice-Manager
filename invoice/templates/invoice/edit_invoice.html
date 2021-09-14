@@ -1,0 +1,48 @@
+{% extends 'invoice/base.html' %}
+{% load bulma_tags %}
+
+{%  block content %}
+<h1>Edit</h1>
+<section class="hero is-fullheight">
+    <div class="container">
+        <div class="card white-ter">
+            <div class="hero-body">
+        
+            <form action="" method="POST">
+                {% csrf_token %}
+                <div class="columns is-centered">
+                    <div class="column is-one-third">
+                        {{form.market}}
+                    </div>
+                    <div class="column is-one-third">
+                        {{form.customer|bulma}}
+                    </div>
+                    <div class="column is-one-third">
+                        {{form.total_amount|bulma}}
+                    </div>
+                    <div class="column is-one-third">
+                        {{form.customer_phone|bulma}}
+                    </div>
+                </div>
+                <div class="columns is-centered">
+                    <div class="column is-one-third">
+                        {{form.billing_address|bulma}}
+                    </div>
+                    <div class="column is-one-third">
+                        date: <input class="input" type="date" name="date">
+                    </div>
+                    <div class="column is-one-third">
+                        due-date: <input class="input" type="date" name="due_date">
+                    </div>
+            </form>
+            <div class="row spacer">
+                <div class="col-4 offset-2">
+                    <button type="submit" class="button btn btn-block is-info is-half">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+{% endblock %}

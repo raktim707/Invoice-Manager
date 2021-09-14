@@ -33,7 +33,7 @@
                                 <th>STATUS</th>
                                 <th>Phone number</th>
                                 <th>DOWNLOAD</th>
-                                <th>View</th>
+                                <th>EDIT</th>
                                 
 
                             </tr>
@@ -55,11 +55,15 @@
                                 <a class="button is-small is-warning" href="#">Not Paid</a>
                                 {% endif %}
                             </td>
-                            <td>{{Invoice.customer_phone}}</td>
+                            <td >{{invoice.customer_phone}}</td>
                             <td width="1%"><a href="{% url 'invoice:invoice-detail' id=invoice.id %}">
                                 <div class="button is-small is-info">View</div>
-                            </a></td>
-                            <td width="1%"><a href="{% url 'invoice:invoice-download' id=invoice.id %}">Download</a></td>
+                            </a>
+                        </td>
+                        <td width="1%"><a href="{% url 'invoice:edit-invoice' invoice.pk %}">Edit</a>
+
+                        </td>
+                            <!--<td width="1%"><a href="{% url 'invoice:invoice-download' id=invoice.id %}">Download</a></td>-->
                         </tr>
                         {% endfor %}
 

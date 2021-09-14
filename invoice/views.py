@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404, reverse
+from django.views.generic.edit import DeleteView, UpdateView
 from django.template.loader import get_template
 from django.http import HttpResponse
 from django.views import View
@@ -68,6 +69,12 @@ def createInvoice(request):
     }
     return render(request, 'invoice/invoice-create.html', context)
 
+class EditInvoice(UpdateView):
+    model = Invoice
+    fields = '__all__'
+    template_name = 'invoice/edit_invoice.html'
+
+
 
 def create_market(request):
     if request.method == 'GET':
@@ -78,6 +85,7 @@ def create_market(request):
         market = Market.objects.create(name=form.data['name'], location=form.data['location'])
         return redirect('/')
     return render(request, 'invoice/market-create.html', {'form': form})
+
 
 def view_PDF(request, id=None):
     invoice = get_object_or_404(Invoice, id=id)
