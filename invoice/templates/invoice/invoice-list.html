@@ -13,6 +13,7 @@
             <p class="card-header-title">
                 All Orders / Change Order Status &nbsp;<button class="button is-rounded is-info">
                     <a href="{% url 'invoice:invoice-create' %}" class="has-text-white">Create Invoice</a></button>
+                    <button class="button is-rounded is-info"> <a href="{% url 'invoice:create-market' %}" class="has-text-white">Create Market</a></button>
             </p>
         </header>
         <div class="card-content">
@@ -27,11 +28,13 @@
                                 <th>CUSTOMER</th>
                                 <th>DATE</th>
                                 <th>DUE DATE</th>
-                                <th>BALANCE</th>
+                                <th>Due</th>
                                 <th>TOTAL</th>
                                 <th>STATUS</th>
-                                <th>View</th>
+                                <th>Phone number</th>
                                 <th>DOWNLOAD</th>
+                                <th>View</th>
+                                
 
                             </tr>
                         </thead>
@@ -52,6 +55,7 @@
                                 <a class="button is-small is-warning" href="#">Not Paid</a>
                                 {% endif %}
                             </td>
+                            <td>{{Invoice.customer_phone}}</td>
                             <td width="1%"><a href="{% url 'invoice:invoice-detail' id=invoice.id %}">
                                 <div class="button is-small is-info">View</div>
                             </a></td>

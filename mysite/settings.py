@@ -39,8 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'invoice',
-
     'bulma',
+    'phonenumber_field',
 ]
 
 MIDDLEWARE = [
@@ -128,3 +128,4 @@ STATICFILES_DIRS = [
 ]
 MEDIA_URL = '/media/'
 MEDIA_ROOT=os.path.join(BASE_DIR, 'media_cdn')
+PHONENUMBER_DEFAULT_REGION = 'BD'

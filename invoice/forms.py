@@ -1,22 +1,31 @@
 from django import forms
 from django.forms import formset_factory
-from .models import Invoice
+from phonenumber_field.formfields import PhoneNumberField
+from .models import Invoice, Market
+
 class InvoiceForm(forms.Form):
     
         # fields = ['customer', 'message']
+    market = forms.ModelChoiceField(queryset=Market.objects.all(), label='market')
     customer = forms.CharField(
         label='Cusomter',
         widget=forms.TextInput(attrs={
             'class': 'form-control',
-            'placeholder': 'Customer/Company Name',
+            'placeholder': 'Customer Name',
             'rows':1
         })
     )
-    customer_email = forms.CharField(
-        label='Customer Email',
+    customer_phone =PhoneNumberField(
+        label='Customer Phone',
         widget=forms.TextInput(attrs={
             'class': 'form-control',
-            'placeholder': 'customer@company.com',
+            'placeholder': 'customer phone number',
+            'rows':1
+        })
+    )
+    total_amount = forms.DecimalField(label='Amount',widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Amount to be paid',
             'rows':1
         })
     )
@@ -28,44 +37,22 @@ class InvoiceForm(forms.Form):
             'rows':1
         })
     )
-    message = forms.CharField(
-        label='Message/Note',
-        widget=forms.TextInput(attrs={
-            'class': 'form-control',
-            'placeholder': 'message',
-            'rows':1
-        })
-    )
 
-class LineItemForm(forms.Form):
+class MarketForm(forms.Form):
     
-    service = forms.CharField(
-        label='Service/Product',
+    name = forms.CharField(
+        label='Market',
         widget=forms.TextInput(attrs={
             'class': 'form-control input',
-            'placeholder': 'Service Name'
+            'placeholder': 'Market Name'
         })
     )
-    description = forms.CharField(
-        label='Description',
+    location = forms.CharField(
+        label='Location',
         widget=forms.TextInput(attrs={
             'class': 'form-control input',
-            'placeholder': 'Enter Book Name here',
+            'placeholder': 'Enter market address',
             "rows":1
-        })
-    )
-    quantity = forms.IntegerField(
-        label='Qty',
-        widget=forms.TextInput(attrs={
-            'class': 'form-control input quantity',
-            'placeholder': 'Quantity'
-        }) #quantity should not be less than one
-    )
-    rate = forms.DecimalField(
-        label='Rate $',
-        widget=forms.TextInput(attrs={
-            'class': 'form-control input rate',
-            'placeholder': 'Rate'
         })
     )
     # amount = forms.DecimalField(
@@ -76,4 +63,4 @@ class LineItemForm(forms.Form):
     #     })
     # )
     
-LineItemFormset = formset_factory(LineItemForm, extra=1)
+#LineItemFormset = formset_factory(LineItemForm, extra=1)

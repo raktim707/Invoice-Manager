@@ -5,17 +5,20 @@
     <div class="container">
         <div class="card white-ter">
             <div class="hero-body">
-                <form class="" method="POST" action="">{% csrf_token %}
+                <form class="" method="POST" action="">
+                    {% csrf_token %}
                     <div class="columns is-centered">
+                        <div class="column is-one-third">
+                            {{form.market}}
+                        </div>
                         <div class="column is-one-third">
                             {{form.customer|bulma}}
                         </div>
-
                         <div class="column is-one-third">
-                            {{form.customer_email|bulma}}
+                            {{form.total_amount|bulma}}
                         </div>
                         <div class="column is-one-third">
-                            {{form.message|bulma}}
+                            {{form.customer_phone|bulma}}
                         </div>
                     </div>
                     <div class="columns is-centered">
@@ -30,39 +33,7 @@
                         </div>
                     </div>
 
-
-                    <table class="table is-fullwidth is-bordered is-hoverable is-striped">
-                        <tbody>
-                            <thead>
-                                <tr>
-                                    <th>Product/Service</th>
-                                    <th>Description</th>
-                                    <th>QTY</th>
-                                    <th>RATE</th>
-                                    <th>AMOUNT$</th>
-                                    <th>ADD</th>
-                                </tr>
-                                {{ formset.management_form }}
-                                {% for form in formset %}
-                                <tr>
-                                    <td>{{form.service}}</td>
-                                    <td>{{form.description}}</td>
-                                    <td>{{form.quantity}}</td>
-                                    <td>{{form.rate}}</td>
-                                    <td class="amount"></td>
-                                    <td>
-                                        <div class="input-group-append">
-                                            <button
-                                                class="button is-small btn btn-success add-form-row">+</button>&nbsp;
-                                            <!-- <button class="button is-small btn btn-warning remove-form-row">-</button> -->
-                                        </div>
-                                    </td>
-                                </tr>
-                                {% endfor %}
-                            </thead>
-                        </tbody>
-
-                    </table>
+                    
                     <div class="row spacer">
                         <div class="col-4 offset-2">
                             <button type="submit" class="button btn btn-block is-info is-half">Create</button>
