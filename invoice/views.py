@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from django.views import View
 from .models import Invoice, Market
 from .forms import InvoiceForm, MarketForm
+from django.urls import reverse_lazy
 
 import pdfkit
 
@@ -73,6 +74,7 @@ class EditInvoice(UpdateView):
     model = Invoice
     fields = '__all__'
     template_name = 'invoice/edit_invoice.html'
+    success_url = reverse_lazy('invoice:invoice-list')
 
 
 
