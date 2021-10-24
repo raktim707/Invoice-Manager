@@ -13,12 +13,15 @@ class Market(models.Model):
 class Invoice(models.Model):
     customer = models.CharField(max_length=100)
     customer_phone = PhoneNumberField(null=True, blank=True)
-    billing_address = models.TextField(null=True, blank=True)
+    billing_address = models.CharField(max_length=250,null=True, blank=True)
+    floor = models.IntegerField(null=True)
     date = models.DateField()
-    due_date = models.DateField(null=True, blank=True)
+    due_date = models.DateField()
     total_amount = models.DecimalField(max_digits=9, decimal_places=2, blank=True, null=True)
     status = models.BooleanField(default=False)
     market = models.ForeignKey(Market, on_delete=models.CASCADE, null=True)
+    class Meta:
+        ordering = ('due_date',)
     def __str__(self):
         return str(self.customer)
     

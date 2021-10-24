@@ -1,38 +1,86 @@
 {% extends 'invoice/base.html' %}
 {% block content %}
+
 <div class="columns is-centered has-text-centered">
     <div class="column is-half">
         <div class="card has-background-white-ter">
             <h1 class="title is-3"></h1>
         </div>
+        {% if mark %}
+        <div class="container" style="text-align: center;">
+            <div class="row justify-content-center">
+            
+                <form class="form-inline mt-2 mt-md-0" method="GET" action="{% url 'invoice:list_by_market' mark.id %}">
+                    {% csrf_token %}
+                    <input class="form-control mr-sm-2" type="search" placeholder="Floor number" aria-label="Search" name="search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search by Floor</button>
+                </form>
+        </div>
+        </div>
+        
+        {% endif %}
     </div>
+    
 </div>
+
 <form action="{% url 'invoice:invoice-list' %}" method="post">{% csrf_token %}
     <div class="card">
         <header class="card-header">
             <p class="card-header-title">
-                All Billings &nbsp;<button class="button is-rounded is-info">
+                <button class="button is-rounded is-info"><a href="{% url 'invoice:invoice-list' %}" class="has-text-white"> All Billings</a></button>&nbsp;&nbsp;
+                <button class="button is-rounded is-info">
                     <a href="{% url 'invoice:invoice-create' %}" class="has-text-white">Create Invoice</a></button>
-                    <button class="button is-rounded is-info"> <a href="{% url 'invoice:create-market' %}" class="has-text-white">Create Market</a></button>
+                    &nbsp;&nbsp;
+                <button class="button is-rounded is-info"> <a href="{% url 'invoice:create-market' %}" class="has-text-white">Create Market</a></button>
+                &nbsp;&nbsp;
+                <button class="button is-rounded is-info"><a href="{% url 'invoice:paid-invoices' %}" class="has-text-white">Paid Invoices</a></button>
+                &nbsp;&nbsp;
+                <button class="button is-rounded is-info"><a href="{% url 'invoice:due-invoices' %}" class="has-text-white">Due Invoices</a></button>
             </p>
+            <div class="dropdown show" style="max-height: 3em;">
+                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Show by Market
+                </a>
+              
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                {% for market in markets %}
+                  <a class="dropdown-item" href="{% url 'invoice:list_by_market' market.id %}">{{market}}</a>
+                {% endfor %}
+                </div>
+              </div>
+              
         </header>
+        {% if mark %}
+                <div class="container" style="text-align: center;">
+                    <div class="row justify-content-center">
+                    <blockquote class="blockquote text-center">
+                    {% if floor %}
+                    <p class="card-header-title">All invoices of {{mark}}'s floor {{floor}}</p>
+                    {% else %}
+                    <p class="card-header-title">All invoices of {{mark}}</p> 
+                    {% endif %}
+                                 
+                    </blockquote>
+                    </div>
+                </div>
+            {% endif %}
         <div class="card-content">
             <div class="content">
-
+                
                 <table class="table is-fullwidth is-bordered is-hoverable is-striped">
                     <tbody>
                         <thead>
                             <tr>
                                 <th></th>
-                                <th>INVOICE</th>
-                                <th>CUSTOMER</th>
+                                <th>হিসাব</th>
+                                <th>দোকানদার</th>
                                 <th>DATE</th>
                                 <th>DUE DATE</th>
                                 <th>Due</th>
-                                <th>TOTAL</th>
+                                <th>সর্বমোট</th>
                                 <th>STATUS</th>
                                 <th>Phone number</th>
-                                <th>DOWNLOAD</th>
+                                <th>Details</th>
                                 <th>EDIT</th>
                                 
 

@@ -1,8 +1,8 @@
-<!DOCTYPE html>{% load static%}
+<!DOCTYPE html>{% load static %}
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Example 2</title>
+    <title>হিসাব বিবরণী</title>
     <link rel="stylesheet" href="{%static 'css/invoice-template-1.css' %}" media="all" />
   </head>
   <body>
@@ -11,8 +11,8 @@
         <img src="{% static 'img/logo.png'%}" style="width: 134px; height:116px"> 
       </div>
       <div id="company">
-        <h1 class="name">{{company.name}}</h1>
-        <div>{{company.address}}</div>
+        <h1 class="name">{{market}}</h1>
+        <div>{{market.location}}</div>
         <div>{{company.phone}}</div>
         <div><a href="mailto:{{company.email}}">{{company.email}}</a></div>
       </div>
@@ -21,10 +21,10 @@
     <main>
       <div id="details" class="clearfix">
         <div id="client">
-          <div class="to">INVOICE TO:</div>
+          <div class="to">দোকানদার:</div>
           <h2 class="name">{{customer}}</h2>
           <div class="address">{{billing_address}}</div>
-          <div class="email"><a href="mailto:{{customer_email}}">{{customer_email}}</a></div>
+          <div class="email"><a href="tel:{{customer_phone}}">{{customer_phone}}</a></div>
         </div>
         <div id="invoice">
           <h1>#{{invoice_id}}</h1>
@@ -35,50 +35,48 @@
       <table border="0" cellspacing="0" cellpadding="0">
         <thead>
           <tr>
-            <th class="no">#</th>
-            <th class="desc">DESCRIPTION</th>
-            <th class="unit">RATE</th>
-            <th class="qty">QUANTITY</th>
+            <th class="start" style="width: 3em; border-radius: 0rem;">Floor</th>
+            <th class="no">মার্কেট</th>
+            
+            <th class="desc">ফোন নাম্বার</th>
+            <th class="start">Start Date</th>
+            <th class="due">Due Date</th>
             <th class="total">TOTAL</th>
           </tr>
         </thead>
         <tbody>
-			{% for item in lineitem %}
           <tr>
-            <td class="no">{{forloop.counter}}</td>
-            <td class="desc">{{item.description}}</td>
-            <td class="unit">${{item.rate}}</td>
-            <td class="qty">{{item.quantity}}</td>
-            <td class="total">${{item.amount}}</td>
+            <td class="start">{{floor}}</td>
+            <td class="no">{{market}}</td>
+            
+            <td class="desc">{{customer_phone}}</td>
+            <td class="start">{{date}}</td>
+            <td class="due">{{due_date}}</td>
+            <td class="total">{{invoice_total}} টাকা</td>
 		  </tr>
-		  {% endfor %}
         </tbody>
         <tfoot>
           <tr>
             <td colspan="2"></td>
             <td colspan="2">SUBTOTAL</td>
-            <td>${{invoice_total}}</td>
+            <td>{{invoice_total}} BDT</td>
           </tr>
           <tr>
             <td colspan="2"></td>
             <td colspan="2">TAX 0%</td>
-            <td>${{invoice_total}}</td>
+            <td>{{invoice_total}} BDT</td>
           </tr>
           <tr>
             <td colspan="2"></td>
             <td colspan="2">GRAND TOTAL</td>
-            <td>${{invoice_total}}</td>
+            <td>{{invoice_total}} BDT</td>
           </tr>
         </tfoot>
       </table>
       <div id="thanks">Thank you!</div>
-      <div id="notices">
-        <div>NOTICE:</div>
-        <div class="notice">A finance charge of 1.5% will be made on unpaid balances after 30 days.</div>
-      </div>
     </main>
     <footer>
-      Invoice was created on a computer and is valid without the signature and seal.
+      Invoice was created on a computer and is invalid without the signature and seal.
     </footer>
   </body>
 </html>

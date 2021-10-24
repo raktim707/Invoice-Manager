@@ -3,10 +3,12 @@ from django.forms import formset_factory
 from phonenumber_field.formfields import PhoneNumberField
 from .models import Invoice, Market
 
+floor_numbers=[(i, str(i)) for i in range(1, 21)]
 class InvoiceForm(forms.Form):
     
         # fields = ['customer', 'message']
     market = forms.ModelChoiceField(queryset=Market.objects.all(), label='market')
+    floor = forms.TypedChoiceField(choices=floor_numbers, coerce=int)
     customer = forms.CharField(
         label='Cusomter',
         widget=forms.TextInput(attrs={
@@ -55,6 +57,12 @@ class MarketForm(forms.Form):
             "rows":1
         })
     )
+
+class search_by_market_form(forms.ModelForm):
+    class Meta:
+        model =Market
+        fields = ('name',)
+
     # amount = forms.DecimalField(
     #     disabled = True,
     #     label='Amount $',
